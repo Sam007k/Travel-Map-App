@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://travel-map-app-frontend-gpej4sywz-sam007k.vercel.app/"],
+    origin: ["http://localhost:3000","https://travel-map-app-z1x1.onrender.com//"],
     methods: ["POST", "PUT", "PATCH", "GET", "DELETE"],
     credentials: true,
   })
