@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     const getPins = async () => {
       try {
-        const res = await axios.get('https://travel-map-app-chi.vercel.app/pins')
+        const res = await axios.get('/pins')
         setPins(res.data)
 
       } catch (err) {
