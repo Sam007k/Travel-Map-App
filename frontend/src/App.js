@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './app.css'
 
 import Map, { Marker, Popup } from 'react-map-gl';
-import { Room, Star } from '@material-ui/icons'
+// import { Room, Star } from '@material-ui/icons'
 import "mapbox-gl/dist/mapbox-gl.css";
 import axios from 'axios'
 import { format } from 'timeago.js'
@@ -75,11 +75,11 @@ function App() {
                 <p className='desc'>{pin.desc}</p>
                 <label>Rating</label>
                 <div className='stars'>
+                  {/* <Star />
                   <Star />
                   <Star />
                   <Star />
-                  <Star />
-                  <Star />
+                  <Star /> */}
                 </div>
                 <label>Information</label>
                 <span className='username'>Created by <b>{pin.username}</b></span>
