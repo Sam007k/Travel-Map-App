@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000","https://travel-map-app-z1x1.onrender.com/"],
+    origin: ["http://localhost:3000","https://travel-map-app-z1x1.onrender.com"],
     methods: ["POST", "PUT", "PATCH", "GET", "DELETE"],
     credentials: true,
   })
