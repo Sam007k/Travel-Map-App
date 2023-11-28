@@ -19,7 +19,7 @@ export default function Register({ setShowRegister }) {
     };
 
     try {
-      await axios.post("/users/register", newUser);
+      await axios.post("https://travel-map-app-api.onrender.com/users/register", newUser);
       setError(false);
       setSuccess(true);
     } catch (err) {
