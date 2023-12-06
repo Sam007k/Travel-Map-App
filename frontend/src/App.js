@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./app.css";
 
 import Map, { Marker, Popup } from "react-map-gl";
-import { Room, Star } from "@material-ui/icons";
+import { Star } from "@material-ui/icons";
 import "mapbox-gl/dist/mapbox-gl.css";
-import axios from "axios";
 import { format } from "timeago.js";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import { userRequest } from "./requestMethods";
+import { SearchBox } from '@mapbox/search-js-react';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
   useEffect(() => {
     const getPins = async () => {
       try {
-        const res = await axios.get('https://travel-map-app-api.onrender.com/api/pins')
+        const res = await userRequest.get('/pins')
 
         setPins(res.data)
 
@@ -71,7 +72,7 @@ function App() {
     };
 
     try {
-      const res = await axios.post("https://travel-map-app-api.onrender.com/api/pins", newPin);
+      const res = await userRequest.post("/pins", newPin);
       setPins([...pins, res.data]);
       setNewPlace(null);
     } catch (err) {
@@ -84,6 +85,13 @@ function App() {
     myStorage.removeItem("user");
   };
 
+  const searchHandler = (e) => {
+    let lat = e.features[0].properties.coordinates.latitude
+    let long = e.features[0].properties.coordinates.longitude
+
+    setViewState({ ...viewState, latitude: lat, longitude: long, zoom: 12 })
+  }
+
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <Map
@@ -94,6 +102,9 @@ function App() {
         mapStyle="mapbox://styles/mapbox/streets-v9"
         onMove={(evt) => setViewState(evt.viewState)}
       >
+        <form style={{margin: '0 auto', marginTop:'20px'}}>
+          <SearchBox accessToken={process.env.REACT_APP_MAPBOX} onRetrieve={searchHandler} value="" />
+        </form>
         {pins.map((pin) => (
           <>
             <Marker
