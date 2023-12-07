@@ -87,9 +87,13 @@ function App() {
 
   const searchHandler = (e) => {
     let lat = e.features[0].properties.coordinates.latitude
-    let long = e.features[0].properties.coordinates.longitude
+    let long = e.features[0].properties.coordinates.longitude 
 
     setViewState({ ...viewState, latitude: lat, longitude: long, zoom: 12 })
+    setNewPlace({
+      lat,
+      lng:long,
+    });
   }
 
   return (
@@ -102,7 +106,7 @@ function App() {
         mapStyle="mapbox://styles/mapbox/streets-v9"
         onMove={(evt) => setViewState(evt.viewState)}
       >
-        <form style={{margin: '0 auto', marginTop:'20px'}}>
+        <form style={{ margin: '0 auto', marginTop: '50px' }}>
           <SearchBox accessToken={process.env.REACT_APP_MAPBOX} onRetrieve={searchHandler} value="" />
         </form>
         {pins.map((pin) => (
@@ -188,12 +192,19 @@ function App() {
           </button>
         ) : (
           <div className="buttons">
-            <button className="button login" onClick={() => setShowLogin(true)}>
+            <button className="button login" onClick={() => {
+              setShowLogin(true)
+              setShowRegister(false)
+
+            }}>
               Log in
             </button>
             <button
               className="button register"
-              onClick={() => setShowRegister(true)}
+              onClick={() => {
+                setShowRegister(true)
+                setShowLogin(false)
+              }}
             >
               Register
             </button>

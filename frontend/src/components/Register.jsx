@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import "./register.css";
 
 export default function Register({ setShowRegister }) {
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -22,6 +22,7 @@ export default function Register({ setShowRegister }) {
       await axios.post("https://travel-map-app-api.onrender.com/api/users/register", newUser);
       setError(false);
       setSuccess(true);
+      setShowRegister(false)
     } catch (err) {
       setError(true);
     }
